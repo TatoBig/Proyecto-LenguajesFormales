@@ -13,9 +13,9 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
     },
     appBar: {
-        width: `calc(100% - ${240}px)`,
+        width: `calc(100% - 240px)`,
         marginLeft: 240,
-      },
+      },    
   }));
 
 function Navbar() {
