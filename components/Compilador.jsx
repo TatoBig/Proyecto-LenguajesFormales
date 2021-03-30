@@ -26,34 +26,26 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#f8f8f8",
         resize: "none",
         marginLeft: 260,
-        marginTop: 20,    
+        marginTop: 80,    
     }
   }));
 
 function Compilador (props) {
     const classes = useStyles()
     return (
-        <React.Fragment>
-            <Autocomplete
-              className={classes.root}
-              id="combo-box-demo"
-              options={props.tokens}
-              getOptionLabel={(option) => option.valor}
-              style={{ width: 300 }}
-              renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
-            />            
+        <React.Fragment>                   
             <TextareaAutosize
               className={classes.textarea}
               rowsMax={4}
               aria-label="maximum height"
               placeholder="Escribir el código"
               defaultValue=""
-              onChange={props.onChange}
+              onChange={props.alCambio}              
             />
-            <Button className={classes.button} onClick={props.onClick} variant="contained" color="primary">
+            <Button className={classes.button} onClick={props.alClic} variant="contained" color="primary">
               Comprobar
             </Button>
-            <Tabla tokens={props.tokens}/>
+            <Tabla tokens={props.tokens}/>          
         </React.Fragment>
     )
 }

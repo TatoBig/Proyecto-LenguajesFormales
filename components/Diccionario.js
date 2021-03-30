@@ -1,0 +1,31 @@
+export const Diccionario = [
+    { valor: 'entero', tipo: 'Palabra Reservada'},
+    { valor: 'decimal', tipo: 'Palabra Reservada'},
+    { valor: 'booleano', tipo: 'Palabra Reservada'},
+    { valor: 'cadena', tipo: 'Palabra Reservada'},
+    { valor: 'si', tipo: 'Palabra Reservada'},
+    { valor: 'sino', tipo: 'Palabra Reservada'},
+    { valor: 'mientras', tipo: 'Palabra Reservada'},
+    { valor: 'hacer', tipo: 'Palabra Reservada'},
+    { valor: 'verdadero', tipo: 'Palabra Reservada'},
+    { valor: 'falso', tipo: 'Palabra Reservada'},
+    { valor: '+', tipo: 'Operador'},
+    { valor: '-', tipo: 'Operador'},
+    { valor: '*', tipo: 'Operador'},
+    { valor: '/', tipo: 'Operador'},
+    { valor: '%', tipo: 'Operador'},
+    { valor: '=', tipo: 'Operador'},
+    { valor: '==', tipo: 'Operador'},
+    { valor: '<', tipo: 'Operador'},
+    { valor: '>', tipo: 'Operador'},
+    { valor: '>=', tipo: 'Operador'},
+    { valor: '<=', tipo: 'Operador'},
+    { valor: '(', tipo: 'Signo'},
+    { valor: ')', tipo: 'Signo'},
+    { valor: '{', tipo: 'Signo'},
+    { valor: '}', tipo: 'Signo'},
+    { valor: '"', tipo: 'Signo'},
+    { valor: ';', tipo: 'Signo'}
+  ];
+
+  export const Numeros = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]

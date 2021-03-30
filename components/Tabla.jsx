@@ -16,12 +16,6 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-
-
 function Tabla(props) {
   const classes = useStyles();
 
@@ -33,16 +27,18 @@ function Tabla(props) {
             <TableCell>Palabra</TableCell>
             <TableCell align="right">Tipo</TableCell>
             <TableCell align="right">Estado</TableCell>
+            <TableCell align="right">Linea</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {props.tokens.map((token) => (
-            <TableRow key={token}>
+            <TableRow key={token.valor}>
               <TableCell component="th" scope="row">
-                {token}
+                {token.valor}
               </TableCell>
-              <TableCell align="right">TIPO</TableCell>
-              <TableCell align="right">ESTADO</TableCell>
+              <TableCell align="right">{token.tipo}</TableCell>
+              <TableCell align="right">{token.estado}</TableCell>
+              <TableCell align="right">{token.linea}</TableCell>
             </TableRow>
           ))}
         </TableBody>
