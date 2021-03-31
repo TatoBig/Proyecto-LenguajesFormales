@@ -11,6 +11,10 @@ export default function Home() {
   let oracion = ''
   let datos = []
 
+  // const abrirArchivo = () => {
+  //   oracion = stringDelArchivo.
+  // }
+
   const crearArrayOracion = () => {
     let token = {
       valor: 'defecto',
