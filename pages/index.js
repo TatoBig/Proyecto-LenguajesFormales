@@ -19,7 +19,14 @@ export default function Home() {
   // const abrirArchivo = () => {
   //   oracion = stringDelArchivo.
   // }
-
+  function Busqueda(pal){
+    for(let s = 0; s<Diccionario.length; s++){
+      if(pal === Diccionario[s].valor){
+        return true
+      }
+  }
+  return false
+}
   const crearArrayOracion = () => {
     let token = {
       valor: 'defecto',
@@ -33,30 +40,79 @@ export default function Home() {
       const palabras = linea.trim().split(" ")
       for(let i = 0; i<palabras.length;i++){
         for(let j = 0; j<Diccionario.length; j++){
-          if(palabras[i] === Diccionario[j].valor){
+            if(Busqueda(palabras[i])){
+              for(let l = 0; l<Diccionario.length; l++){
+                  if(palabras[i]===Diccionario[l].valor){
+                    token = {
+                      valor: palabras[i],
+                      tipo: Diccionario[l].tipo,
+                      estado: 'Válido',
+                      linea: no_linea+1
+                    }
+                  }
+              }
+              datos.push(token)
+              break;
+            }else if(palabras[i].charAt(0)>="a" || palabras[i].charAt(0)>="A"){
+              for(let k = 0; k<palabras[i].length; k++){
+                if (palabras[i].charAt(0)>="a" || palabras[i].charAt(0)>="A") {
+                  token = {
+                  valor: palabras[i],
+                  tipo: 'Identificador',
+                  estado: 'Válido',
+                  linea: no_linea+1
+                }
+                  break;
+                }
+              }
+              datos.push(token) 
+              break;         
+          }
+          else if(palabras[i]>=0)
+          {
             token = {
               valor: palabras[i],
-              tipo: Diccionario[j].tipo,
+              tipo: 'Numeros',
               estado: 'Válido',
               linea: no_linea+1
             }
             datos.push(token)
-            break;
-          }else if(Diccionario.length === j+1){
-            token = {
-              valor: palabras[i],
-              tipo: 'variable',
-              estado: 'Válido',
-              linea: no_linea+1
+            break; 
+          }
+          else{ 
+            var flag=false
+            if(palabras[i].charAt(0)>="0"){
+              for(let g=0;g<palabras[i].length;g++)
+              {
+                if(palabras[i].charAt(g)>="a" || palabras[i].charAt(g)>="A")
+                {
+
+                console.log("funciona")
+                  token = {
+                    valor: palabras[i],
+                    tipo: 'ERROR',
+                    estado: 'Invalido',
+                    linea: no_linea+1
+                  }
+                  flag=true
+                  break;
+                }
+              }
+              if(flag)
+              {
+                datos.push(token)
+                break;
+              }
             }
-            datos.push(token)          
-        }
-      }
-      setObjetos(datos)
+            
+          }
+    }}
+    setObjetos(datos)
     }
-      }
-      )
-    }
+  
+   
+   )
+  }
 
   const handleChange = e => {
     setOracion(e.target.value)
