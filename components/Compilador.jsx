@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#f8f8f8",
         resize: "none",
         marginLeft: 260,
-        marginTop: 80,    
+        marginTop: 80,
     }
   }));
 
@@ -39,7 +39,7 @@ function Compilador (props) {
               rowsMax={4}
               aria-label="maximum height"
               placeholder="Escribir el código"
-              defaultValue=""
+              value={props.defecto}
               onChange={props.alCambio}              
             />
             <Button className={classes.button} onClick={props.alClic} variant="contained" color="primary">

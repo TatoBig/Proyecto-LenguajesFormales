@@ -1,20 +1,19 @@
 import React, { useState, useMemo, useRef, useCallback } from 'react'
 import Navbar from '../components/Navbar'
 import SideBar from '../components/SideBar'
-import Compilador from '../components/Compilador';
+import Compilador from '../components/Compilador'
 import { Diccionario } from '../components/Diccionario'
-import { TextareaAutosize } from '@material-ui/core';
+import { TextareaAutosize } from '@material-ui/core'
 
 
 export default function Home() {
   const [ objetos, setObjetos ] = useState([])
-
-  let oracion = ''
+  const [ oracion, setOracion ] = useState('')
   let datos = []
 
-  const newArchivo=()=>{
-      setObjetos(datos)
-      
+  const limpiar = () => {
+      setObjetos([])
+      setOracion('')
   }
 
   // const abrirArchivo = () => {
@@ -58,18 +57,13 @@ export default function Home() {
       }
       )
     }
- 
-    
-
-    const limpia = () => {
-      newArchivo()
-    }
 
   const handleChange = e => {
-    oracion = e.target.value
+    setOracion(e.target.value)
+    console.log(oracion)
     console.log({      
       value: e.target.value
-    })    
+    })
   } 
 
   const handleOnClick = e => {
@@ -80,8 +74,8 @@ export default function Home() {
   return (
     <React.Fragment>
       <Navbar/>
-      <SideBar newArchivo={limpia}/>
-      <Compilador alCambio={handleChange} alClic={handleOnClick} tokens={objetos} />
+      <SideBar newArchivo={limpiar}/>
+      <Compilador alCambio={handleChange} alClic={handleOnClick} tokens={objetos} defecto={oracion}/>
     </React.Fragment>
   )
 }
