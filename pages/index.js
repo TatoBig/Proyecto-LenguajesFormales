@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import SideBar from '../components/SideBar'
 import Compilador from '../components/Compilador';
 import { Diccionario } from '../components/Diccionario'
+import { TextareaAutosize } from '@material-ui/core';
 
 
 export default function Home() {
@@ -10,6 +11,11 @@ export default function Home() {
 
   let oracion = ''
   let datos = []
+
+  const newArchivo=()=>{
+      setObjetos(datos)
+      
+  }
 
   // const abrirArchivo = () => {
   //   oracion = stringDelArchivo.
@@ -54,6 +60,11 @@ export default function Home() {
     }
  
     
+
+    const limpia = () => {
+      newArchivo()
+    }
+
   const handleChange = e => {
     oracion = e.target.value
     console.log({      
@@ -69,7 +80,7 @@ export default function Home() {
   return (
     <React.Fragment>
       <Navbar/>
-      <SideBar/>
+      <SideBar newArchivo={limpia}/>
       <Compilador alCambio={handleChange} alClic={handleOnClick} tokens={objetos} />
     </React.Fragment>
   )

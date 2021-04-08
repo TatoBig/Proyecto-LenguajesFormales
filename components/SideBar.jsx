@@ -35,9 +35,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PermanentDrawerLeft() {
+export default function PermanentDrawerLeft(props) {
   const classes = useStyles();
-
+  
   return (
     <div className={classes.root}>
    
@@ -52,7 +52,7 @@ export default function PermanentDrawerLeft() {
         <div className={classes.toolbar} />
         <Divider />
         <List>
-          <ListItem button>
+          <ListItem button onClick={props.newArchivo}>
             <ListItemIcon><AddCircleIcon /></ListItemIcon>
             <ListItemText primary="Nuevo Archivo"/>
           </ListItem>
