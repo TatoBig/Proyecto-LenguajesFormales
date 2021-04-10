@@ -56,12 +56,10 @@ export default function PermanentDrawerLeft(props) {
             <ListItemIcon><AddCircleIcon /></ListItemIcon>
             <ListItemText primary="Nuevo Archivo"/>
           </ListItem>
-
-          <ListItem button>
+          <ListItem  button onClick={props.openArchivo} >
             <ListItemIcon><FolderOpenIcon /></ListItemIcon>
             <ListItemText primary="Abrir Archivo"/>
           </ListItem>      
-
           <ListItem button>
             <ListItemIcon><SaveIcon /></ListItemIcon>
             <ListItemText primary="Guardar Archivo"/>

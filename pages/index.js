@@ -113,6 +113,27 @@ export default function Home() {
    
    )
   }
+  function openText(contentType, multiple){
+    return new Promise(resolve => {
+      <input accept="text/*" className={classes.input} id="contained-button-file" multiple type="file" />
+        let input = document.createElement('input');
+        input.type = 'file';
+        input.multiple = multiple;
+        input.accept = '.txt';
+
+        input.onchange = _ => {
+            let files = Array.from(input.files);
+            if (multiple)
+                resolve(files);
+                
+            else
+                resolve(files[0]);
+        };
+
+        input.click();
+    });
+}
+
 
   const handleChange = e => {
     setOracion(e.target.value)
@@ -130,7 +151,7 @@ export default function Home() {
   return (
     <React.Fragment>
       <Navbar/>
-      <SideBar newArchivo={limpiar}/>
+      <SideBar newArchivo={limpiar} openArchivo={openText}/>
       <Compilador alCambio={handleChange} alClic={handleOnClick} tokens={objetos} defecto={oracion}/>
     </React.Fragment>
   )
