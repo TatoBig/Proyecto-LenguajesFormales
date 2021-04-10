@@ -53,16 +53,40 @@ export default function Home() {
               }
               datos.push(token)
               break;
-            }else if(palabras[i].charAt(0)>="a" || palabras[i].charAt(0)>="A"){
+            }else if(palabras[i].charAt(0)>="a" || palabras[i].charAt(0)>="A" || palabras[i].charAt(palabras.length-1)>=Diccionario[j].valor){
+              let conjunto=''
               for(let k = 0; k<palabras[i].length; k++){
-                if (palabras[i].charAt(0)>="a" || palabras[i].charAt(0)>="A") {
-                  token = {
-                  valor: palabras[i],
-                  tipo: 'Identificador',
-                  estado: 'Válido',
-                  linea: no_linea+1
+                /////////////////////////////////////////////
+                      if ((palabras[i].charAt(k)>="a" && palabras[i].charAt(k)<="z") || (palabras[i].charAt(k)>="A" && palabras[i].charAt(k)<="Z") || (palabras[i].charAt(k)>=0 && palabras[i].charAt(k)<=9)) {
+                      conjunto=conjunto+palabras[i].charAt(k)
+                      if(conjunto.charAt(0)){
+                        token = {
+                          valor: conjunto,
+                          tipo: 'Numeros',
+                          estado: 'Válido',
+                          linea: no_linea+1
+                        }
+                      }
+                      else{
+                      token = {
+                      valor: conjunto,
+                      tipo: 'Identificador',
+                      estado: 'Válido',
+                      linea: no_linea+1
+                    }
+                  }
                 }
-                  break;
+                //////////////////////////////////////////////
+                else{
+                  datos.push(token)
+                  conjunto=''
+                  token = {
+                    valor: palabras[i].charAt(k),
+                    tipo: 'Signo',
+                    estado: 'Válido',
+                    linea: no_linea+1
+                  }
+                  conjunto=''
                 }
               }
               datos.push(token) 

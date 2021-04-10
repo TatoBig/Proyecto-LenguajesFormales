@@ -27,3 +27,4 @@ export const Diccionario = [
     { valor: '"', tipo: 'Signo'},
     { valor: ';', tipo: 'Signo'}
   ];
+  export const Numeros = [0,1,2,3,4,5,6,7,8,9]
