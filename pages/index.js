@@ -113,26 +113,29 @@ export default function Home() {
    
    )
   }
-  function openText(contentType, multiple){
-    return new Promise(resolve => {
-      <input accept="text/*" className={classes.input} id="contained-button-file" multiple type="file" />
-        let input = document.createElement('input');
-        input.type = 'file';
-        input.multiple = multiple;
-        input.accept = '.txt';
+  const openText=()=>{
+    var input = document.createElement('input');
+    input.type = 'file';
 
-        input.onchange = _ => {
-            let files = Array.from(input.files);
-            if (multiple)
-                resolve(files);
-                
-            else
-                resolve(files[0]);
-        };
+    input.onchange = e => { 
 
-        input.click();
-    });
+      // getting a hold of the file reference
+      var file = e.target.files[0]; 
+
+      // setting up the reader
+      var reader = new FileReader();
+      reader.readAsText(file); // this is reading as data url
+
+      // here we tell the reader what to do when it's done reading...
+      reader.onload = readerEvent => {
+          var content = readerEvent.target.result; // this is the content!
+          setOracion(content)
+      }
+
+    }
+    input.click();
 }
+
 
 
   const handleChange = e => {
