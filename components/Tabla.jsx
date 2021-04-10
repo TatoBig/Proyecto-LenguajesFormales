@@ -32,7 +32,7 @@ function Tabla(props) {
         </TableHead>
         <TableBody>
           {props.tokens.map((token) => (
-            <TableRow key={token.valor}>
+            <TableRow key={token.id}>
               <TableCell component="th" scope="row">
                 {token.valor}
               </TableCell>
