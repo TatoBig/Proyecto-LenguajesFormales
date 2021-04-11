@@ -179,6 +179,37 @@ export default function Home() {
     input.click();
 }
 
+  function Recopilacion(){
+    let recopilador=''
+    for (let cont = 0; cont < objetos.length; cont++)
+    {
+      recopilador=recopilador+objetos[cont].valor+'----'+objetos[cont].tipo+'----'+objetos[cont].estado+'----'+objetos[cont].linea+'\n'
+    }
+    return recopilador
+  }
+  
+  function saveText(nombreArchivo) {
+    var contenidoEnBlob = new Blob([Recopilacion()], {type: 'text/plain'});
+    var lector = new FileReader();
+    
+    lector.onload = function(event) {
+    
+    var guardar = document.createElement('a');
+    guardar.href = event.target.result;
+    guardar.target = '_blank';
+    guardar.download = 'archivos.txt' || 'archivo.dat';
+    var clicEvent = new MouseEvent('click', {
+    'bubbles': false,
+    'cancelable': true
+    });
+    
+    guardar.dispatchEvent(clicEvent);
+    };
+    
+    lector.readAsDataURL(contenidoEnBlob);
+    };
+    
+   
 
   const handleChange = e => {
   setOracion(e.target.value)
@@ -195,7 +226,7 @@ export default function Home() {
   return (
     <React.Fragment>
       <Navbar/>
-      <SideBar newArchivo={limpiar} openArchivo={openText}/>
+      <SideBar newArchivo={limpiar} openArchivo={openText} saveArchivo={saveText}/>
       <Compilador alCambio={handleChange} alClic={handleOnClick} tokens={objetos} defecto={oracion}/>
     </React.Fragment>
   )
