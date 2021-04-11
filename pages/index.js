@@ -180,7 +180,7 @@ export default function Home() {
 }
 
   function Recopilacion(){
-    let recopilador='Palabra----Tipo----Estado----Linea'
+    let recopilador='Palabra----Tipo----Estado----Linea\n'
     for (let cont = 0; cont < objetos.length; cont++)
     {
       recopilador=recopilador+objetos[cont].valor+'----'+objetos[cont].tipo+'----'+objetos[cont].estado+'----'+objetos[cont].linea+'\n'
