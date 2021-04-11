@@ -15,6 +15,8 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       width: "120px",
       marginLeft: 260,
+      color: "#ffffff",
+      backgroundColor: "#1E1E1E"
   },
     textarea: {
         width: "50%",
@@ -42,7 +44,7 @@ function Compilador (props) {
               value={props.defecto}
               onChange={props.alCambio}              
             />
-            <Button className={classes.button} onClick={props.alClic} variant="contained" color="primary">
+            <Button className={classes.button} onClick={props.alClic} variant="contained" >
               Comprobar
             </Button>
             <Tabla tokens={props.tokens}/>          

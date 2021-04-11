@@ -9,7 +9,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import SaveIcon from '@material-ui/icons/Save';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
-
+import Snackbar from '@material-ui/core/Snackbar';
+import { Alert } from '@material-ui/lab/';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,12 +26,17 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: 240,
+    background: "#36393f",
+    color: "#C6C6C5"
+  },
+  icon: {
+    color: "#868C96",
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
+    background: theme.palette.background.default,
     padding: theme.spacing(3),
   },
 }));
@@ -53,20 +59,29 @@ export default function PermanentDrawerLeft(props) {
         <Divider />
         <List>
           <ListItem button onClick={props.newArchivo}>
-            <ListItemIcon><AddCircleIcon /></ListItemIcon>
+            <ListItemIcon><AddCircleIcon className={classes.icon}/></ListItemIcon>
             <ListItemText primary="Nuevo Archivo"/>
           </ListItem>
           <ListItem button onClick={props.openArchivo}>
-            <ListItemIcon><FolderOpenIcon /></ListItemIcon>
+            <ListItemIcon><FolderOpenIcon className={classes.icon}/></ListItemIcon>
             <ListItemText primary="Abrir Archivo"/>
           </ListItem>      
           <ListItem button onClick={props.saveArchivo}>
-            <ListItemIcon><SaveIcon /></ListItemIcon>
-            <ListItemText primary="Guardar Archivo"/>
+            <ListItemIcon><SaveIcon className={classes.icon} /></ListItemIcon>
+            <ListItemText primary="Guardar Tabla"/>
+          </ListItem>
+          <ListItem button onClick={props.saveTexto}>
+            <ListItemIcon><SaveIcon className={classes.icon}/></ListItemIcon>
+            <ListItemText primary="Guardar Texto"/>
           </ListItem>   
         </List>
         <Divider />        
-      </Drawer>      
+      </Drawer>
+      <Snackbar open={props.open} autoHideDuration={6000} onClose={props.cerrarAlerta}>
+        <Alert onClose={props.cerrarAlerta} severity="success" elevation={6} variant="filled" >
+          Acción exitosa
+        </Alert>
+      </Snackbar>  
     </div>
   );
 }

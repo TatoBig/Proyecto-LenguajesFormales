@@ -5,7 +5,7 @@ import Compilador from '../components/Compilador'
 import { Diccionario } from '../components/Diccionario'
 import { TextareaAutosize } from '@material-ui/core'
 import { LensTwoTone } from '@material-ui/icons'
-
+import Footer from '../components/Footer'
 export default function Home() {
   //  ---- EXPRESIONES REGULARES ----
   let identificadores = /[a-z]([a-z]|[0-9])*/ 
@@ -18,8 +18,17 @@ export default function Home() {
   const limpiar = () => {
       setObjetos([])
       setOracion('')
+      setOpen(true)
   }
+  
+  const [open, setOpen] = React.useState(false);
 
+  const cerrarAlerta = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setOpen(false)
+  }
   // const abrirArchivo = () => {
   //   oracion = stringDelArchivo.
   // }
@@ -33,6 +42,7 @@ export default function Home() {
 }
   const crearArrayOracion = () => {
     let no_linea = 0    
+    let simbolo = ''
     const lineas = oracion.replace(/\r/g, "").split(/\n/)
     lineas.map((linea) => {
     no_linea += 1
@@ -45,7 +55,19 @@ export default function Home() {
         if(esCaracterEspecial(linea.charAt(i)) === true){
           console.log(`Analizando palabra: ${palabra}`)
           analizar(palabra, no_linea)
-          analizarSimbolo(linea.charAt(i),no_linea)
+          if(linea.charAt(i)==='<' || linea.charAt(i)==='>' || linea.charAt(i)==='='){
+            if(linea.charAt(i+1)==='='){
+              simbolo =  linea.charAt(i) + linea.charAt(i+1)
+              analizarSimbolo(simbolo,no_linea)
+              simbolo = ''
+              i++
+            }else{
+              analizarSimbolo(linea.charAt(i),no_linea)
+            }
+          }else{
+            analizarSimbolo(linea.charAt(i),no_linea)
+          }
+          
           console.log(`Caracter: ${linea.charAt(i)}`)
           palabra = ''
         }
@@ -173,10 +195,12 @@ export default function Home() {
       reader.onload = readerEvent => {
           var content = readerEvent.target.result; // this is the content!
           setOracion(content)
+          setOpen(true)
       }
 
     }
     input.click();
+    
 }
 
   function Recopilacion(){
@@ -188,7 +212,7 @@ export default function Home() {
     return recopilador
   }
   
-  function saveText(nombreArchivo) {
+  function saveTabla() {
     var contenidoEnBlob = new Blob([Recopilacion()], {type: 'text/plain'});
     var lector = new FileReader();
     
@@ -207,7 +231,32 @@ export default function Home() {
     };
     
     lector.readAsDataURL(contenidoEnBlob);
+    setOpen(true)
     };
+  
+  function saveTexto(){
+    
+    var contenidoEnBlob = new Blob([oracion], {type: 'text/plain'});
+    var lector = new FileReader();
+    
+    lector.onload = function(event) {
+    
+    var guardar = document.createElement('a');
+    guardar.href = event.target.result;
+    guardar.target = '_blank';
+    guardar.download = 'archivos.txt' || 'archivo.dat';
+    var clicEvent = new MouseEvent('click', {
+    'bubbles': false,
+    'cancelable': true
+    });
+    
+    guardar.dispatchEvent(clicEvent);
+    };
+    
+    lector.readAsDataURL(contenidoEnBlob);
+    setOpen(true)
+    };
+  
     
    
 
@@ -226,105 +275,9 @@ export default function Home() {
   return (
     <React.Fragment>
       <Navbar/>
-      <SideBar newArchivo={limpiar} openArchivo={openText} saveArchivo={saveText}/>
+      <SideBar newArchivo={limpiar} openArchivo={openText} saveArchivo={saveTabla} saveTexto={saveTexto} open={open} cerrarAlerta={cerrarAlerta}/>
       <Compilador alCambio={handleChange} alClic={handleOnClick} tokens={objetos} defecto={oracion}/>
+      <Footer/>
     </React.Fragment>
   )
 }
-
-
-    //   for(let i = 0; i<palabras.length;i++){
-    //     for(let j = 0; j<Diccionario.length; j++){
-    //         if(Busqueda(palabras[i])){
-    //           for(let l = 0; l<Diccionario.length; l++){
-    //               if(palabras[i]===Diccionario[l].valor){
-    //                 token = {
-    //                   valor: palabras[i],
-    //                   tipo: Diccionario[l].tipo,
-    //                   estado: 'Válido',
-    //                   linea: no_linea+1
-    //                 }
-    //               }
-    //           }
-    //           datos.push(token)
-    //           break;
-    //         }else if(palabras[i].charAt(0)>="a" || palabras[i].charAt(0)>="A" || palabras[i].charAt(palabras.length-1)>=Diccionario[j].valor){
-    //           let conjunto=''
-    //           for(let k = 0; k<palabras[i].length; k++){
-    //             /////////////////////////////////////////////
-    //                   if ((palabras[i].charAt(k)>="a" && palabras[i].charAt(k)<="z") || (palabras[i].charAt(k)>="A" && palabras[i].charAt(k)<="Z") || (palabras[i].charAt(k)>=0 && palabras[i].charAt(k)<=9)) {
-    //                   conjunto=conjunto+palabras[i].charAt(k)
-    //                   if(conjunto.charAt(0)>=0 && conjunto.charAt(0)<=9){
-    //                     token = {
-    //                       valor: conjunto,
-    //                       tipo: 'Numeros',
-    //                       estado: 'Válido',
-    //                       linea: no_linea+1
-    //                     }
-    //                   }
-    //                   else{
-    //                   token = {
-    //                   valor: conjunto,
-    //                   tipo: 'Identificador',
-    //                   estado: 'Válido',
-    //                   linea: no_linea+1
-    //                 }
-    //               }
-    //             }
-    //             //////////////////////////////////////////////
-    //             else{
-    //               datos.push(token)
-    //               conjunto=''
-    //               token = {
-    //                 valor: palabras[i].charAt(k),
-    //                 tipo: 'Signo',
-    //                 estado: 'Válido',
-    //                 linea: no_linea+1
-    //               }
-    //               conjunto=''
-    //             }
-    //           }
-    //           datos.push(token) 
-    //           break;         
-    //       }
-    //       else if(palabras[i]>=0)
-    //       {
-    //         token = {
-    //           valor: palabras[i],
-    //           tipo: 'Numeros',
-    //           estado: 'Válido',
-    //           linea: no_linea+1
-    //         }
-    //         datos.push(token)
-    //         break; 
-    //       }
-    //       else{ 
-    //         var flag=false
-    //         if(palabras[i].charAt(0)>="0"){
-    //           for(let g=0;g<palabras[i].length;g++)
-    //           {
-    //             if(palabras[i].charAt(g)>="a" || palabras[i].charAt(g)>="A")
-    //             {
-
-    //             console.log("funciona")
-    //               token = {
-    //                 valor: palabras[i],
-    //                 tipo: 'ERROR',
-    //                 estado: 'Invalido',
-    //                 linea: no_linea+1
-    //               }
-    //               flag=true
-    //               break;
-    //             }
-    //           }
-    //           if(flag)
-    //           {
-    //             datos.push(token)
-    //             break;
-    //           }
-    //         }
-            
-    //       }
-    // }}
-    // setObjetos(datos)
-    // }

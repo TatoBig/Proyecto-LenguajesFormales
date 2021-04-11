@@ -15,7 +15,11 @@ const useStyles = makeStyles((theme) => ({
     appBar: {
         width: `calc(100% - 240px)`,
         marginLeft: 240,
+        backgroundColor: '#1E1E1E',
       },    
+    color: {
+      color: '#ffffff',
+    }
   }));
 
 function Navbar() {
@@ -23,7 +27,7 @@ function Navbar() {
     return(
         <React.Fragment>
             <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
+                <Toolbar className={classes.color}>
                     <Typography variant="h6" noWrap>
                         Proyecto Lenguajes Formales y Automatas
                     </Typography>
