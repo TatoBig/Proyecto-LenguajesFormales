@@ -11,21 +11,6 @@ const Diagrama = (props) => {
             <Typography variant="h1" color="initial">
                 {props.regex}
             </Typography>
-            <Typography variant="h1" color="initial">
-                {props.regex}
-            </Typography>
-            <Typography variant="h1" color="initial">
-                {props.regex}
-            </Typography>
-            <Typography variant="h1" color="initial">
-                {props.regex}
-            </Typography>
-            <Typography variant="h1" color="initial">
-                {props.regex}
-            </Typography>
-            <Typography variant="h1" color="initial">
-                {props.regex}
-            </Typography>
         </React.Fragment>
     )
 }
