@@ -44,7 +44,7 @@ function Compilador(props) {
       />
       <Button className={classes.button} onClick={props.alClic} variant="contained" >
         Comprobar
-            </Button>
+      </Button>
       <Tabla tokens={props.tokens} />
     </React.Fragment>
   )

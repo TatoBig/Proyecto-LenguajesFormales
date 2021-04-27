@@ -922,6 +922,11 @@ isobject@^2.0.0:
   dependencies:
     isarray "1.0.0"
 
+javascript-state-machine@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/javascript-state-machine/-/javascript-state-machine-3.1.0.tgz#06eeb2136a6a19ae1b56105c25caec283dd5cd14"
+  integrity sha512-BwhYxQ1OPenBPXC735RgfB+ZUG8H3kjsx8hrYTgWnoy6TPipEy4fiicyhT2lxRKAXq9pG7CfFT8a2HLr6Hmwxg==
+
 jest-worker@24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-24.9.0.tgz#5dbfdb5b2d322e98567898238a9697bcce67b3e5"
@@ -1042,7 +1047,7 @@ lodash.sortby@^4.7.0:
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
   integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
 
-lodash@^4.17.13:
+lodash@^4.17.13, lodash@^4.17.15:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -1430,6 +1435,11 @@ react-dom@17.0.1:
     object-assign "^4.1.1"
     scheduler "^0.20.1"
 
+react-hook-form@^7.3.4:
+  version "7.3.4"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.3.4.tgz#6a246cea3ff8669168a56dd166b462d28aa2f076"
+  integrity sha512-xreG3NHFlbKFrN1Fs+rZUT5RN9zkx4qn0vyY+6tO1xNfhOkfgwkTYU1/PkktYsWw6GerMw16vX5CPdIZVfyB1A==
+
 react-is@16.13.1, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -1789,6 +1799,25 @@ util@^0.11.0:
   integrity sha512-HShAsny+zS2TZfaXxD9tYj4HQGlBezXZMZuM/S5PKLLoZkShZiGk9o5CzukI1LVHZvjdvZ2Sj1aW/Ndn2NB/HQ==
   dependencies:
     inherits "2.0.3"
+
+uuid@^7.0.2:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.3.tgz#c5c9f2c8cf25dc0a372c4df1441c41f5bd0c680b"
+  integrity sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==
+
+vis-react-core@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/vis-react-core/-/vis-react-core-1.0.0.tgz#21f28ba29e17a7fff57733802cbce4231116b197"
+  integrity sha512-K5bJNbd04cOapL2oqTP7AgxLajaaXH9r7z5CsO/uFccbeidzfcX7ZZeV4yXuGMRB70uXGScMa/ZrC3L3+u+i7Q==
+
+vis-react@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/vis-react/-/vis-react-0.5.1.tgz#613dee3170ca68799cc79852f74f7151899973d1"
+  integrity sha512-jXwTM7mbGpTohOiiKAYXPXyEEvm6X0oE7hdV0aKnZEmqnSMbsAI1AxQbyZdP7iPrmn0D/RbeotTh05614XjI9w==
+  dependencies:
+    lodash "^4.17.15"
+    uuid "^7.0.2"
+    vis-react-core "1.0.0"
 
 vm-browserify@1.1.2, vm-browserify@^1.0.1:
   version "1.1.2"

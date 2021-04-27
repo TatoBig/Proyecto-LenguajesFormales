@@ -1,0 +1,13 @@
+{
+    "workbench.colorCustomizations": {
+  
+    },
+    "editor.tokenColorCustomizations": {
+        "[SynthWave '84]": {
+            "variables": "#DD94C3",
+        },
+        // "[Synthwave x Fluoromachine]": {
+        //     "types":"#FF0000"
+        // }
+    }
+}
