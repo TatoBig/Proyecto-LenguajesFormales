@@ -13,9 +13,11 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "javascript-state-machine": "^3.1.0",
     "next": "10.0.9",
+    "prop-types": "^15.7.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-hook-form": "^7.3.4",
+    "vis-network-hook": "^0.4.3",
     "vis-react": "^0.5.1",
     "yarn": "^1.22.10"
   }
