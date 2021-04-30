@@ -1,30 +1,72 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import VisProvider from "vis-network-hook";
 import Graph from "./Graph";
 
-const visreact = () => {
-    const data = {
-        nodes: [
-          { id: 1, label: "Node 1" },
-          { id: 2, label: "Node 2" },
-          { id: 3, label: "Node 3" },
-          { id: 4, label: "Node 4" },
-          { id: 5, label: "Node 5" }
-        ],
-        edges: [
-          { from: 1, to: 3 },
-          { from: 1, to: 2 },
-          { from: 2, to: 4 },
-          { from: 2, to: 5 },
-          { from: 3, to: 3 }
-        ]
-      };
-    
-      return (
-        <VisProvider graph={data}>
-          <Graph />
-        </VisProvider>
-      );
+const visreact = ({ tokensState }) => {
+
+  const [data, setData] = useState({})
+  const localData = {
+    nodes: [],
+    edges: []
+  }
+
+
+  useEffect(() => {
+    if (tokensState) {
+      console.log(tokensState)
+      procesarTokens()
+    }
+  }, [tokensState])
+
+  const procesarTokens = () => {
+    let contadorDeNodos = 1
+    try {
+      tokensState.map((token, index) => {
+        let kliene = false
+        let newToken = token
+        if (index === 0) {
+          localData.nodes.push({
+            id: 0, label: "q0"
+          })
+        } 
+        for (let i = 0; i < token.length; i++) {
+          if (token[i] === '|') {
+            newToken = newToken.replace('|', ',')
+            newToken = newToken.replace('(', ' ')
+            newToken = newToken.replace(')', ' ')
+          }
+          if (token[i] === '*') {
+            newToken = newToken.replace('*', ' ')
+            localData.edges.push({
+              from: contadorDeNodos-1, to: contadorDeNodos-1, label: `${newToken}`
+            })
+            kliene = true
+          }
+        }
+        if (kliene === false) {
+          localData.nodes.push({
+            id: contadorDeNodos, label: `q${contadorDeNodos}`
+          })
+          localData.edges.push({
+            from: contadorDeNodos-1, to: contadorDeNodos, label: `${newToken}`
+          })
+          contadorDeNodos++
+        } else {
+          kliene = false
+        }
+        
+      })
+    } catch (e) {
+
+    }
+    setData(localData)
+  }
+
+  return (
+    <VisProvider graph={data}>
+      <Graph />
+    </VisProvider>
+  );
 }
 
 export default visreact
