@@ -61,9 +61,83 @@ const visreact = ({ tokensState }) => {
     }
     setData(localData)
   }
-
+  const options = {
+    layout: {
+      randomSeed: 2
+    },
+    nodes: {
+      scaling: {
+        customScalingFunction: function (min, max, total, value) {
+          return value / total;
+        },
+        min: 5,
+        max: 150,
+      },
+      color: {
+        background: "#ffffff",
+        border: "#87a6aa",
+        highlight: {
+          border: "#87a6aa",
+          background: "#ffffff"
+        },
+        hover: {
+          border: "#87a6aa",
+          background: "#ffffff"
+        }
+      },
+      fixed: {
+        x: false,
+        y: false
+      },
+      shape: "circle",
+      size: 13,
+      borderWidth: 1.5,
+      borderWidthSelected: 2,
+      font: {
+        size: 15,
+        align: "center",
+        bold: {
+          color: "#bbbdc0",
+          size: 15,
+          vadjust: 0,
+          mod: "bold"
+        }
+      }
+    },
+    edges: {
+      width: 0.01,
+      color: {
+        color: "#D3D3D3",
+        highlight: "#797979",
+        hover: "#797979",
+        opacity: 3.0
+      },
+      arrows: {
+        to: { enabled: true, scaleFactor: 1, type: "dot" },
+        middle: { enabled: false, scaleFactor: 1, type: "arrow" },
+        from: { enabled: false, scaleFactor: 1, type: "arrow" }
+      }
+    },
+    physics: {
+      barnesHut: {
+        gravitationalConstant: -1800,
+        centralGravity: 1,
+        springLength: 30,
+        avoidOverlap: 1
+      },
+      stabilization: { iterations: 2500 }
+    },
+    interaction: {
+      hover: true,
+      hoverConnectedEdges: true,
+      hoverEdges: true,
+      selectable: true,
+      selectConnectedEdges: true,
+      dragView: true
+    }
+  };
   return (
-    <VisProvider graph={data}>
+    <VisProvider graph={data} options={options}>
       <Graph />
     </VisProvider>
   );
