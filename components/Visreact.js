@@ -113,9 +113,9 @@ const visreact = ({ tokensState }) => {
         opacity: 3.0
       },
       arrows: {
-        to: { enabled: true, scaleFactor: 1, type: "dot" },
-        middle: { enabled: false, scaleFactor: 1, type: "arrow" },
-        from: { enabled: false, scaleFactor: 1, type: "arrow" }
+        to: { enabled: true, scaleFactor: 1 },
+        middle: { enabled: false, scaleFactor: 1 },
+        from: { enabled: false, scaleFactor: 1 }
       }
     },
     physics: {
@@ -130,7 +130,6 @@ const visreact = ({ tokensState }) => {
     interaction: {
       hover: true,
       hoverConnectedEdges: true,
-      hoverEdges: true,
       selectable: true,
       selectConnectedEdges: true,
       dragView: true

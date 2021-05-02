@@ -5,7 +5,8 @@ import Diagrama from "../components/Diagrama"
 import { Diccionario } from "../components/Diccionario"
 import Footer from "../components/Footer"
 import { useForm } from "react-hook-form"
-import { makeStyles, Button, Paper, Typography } from "@material-ui/core"
+import { makeStyles, Button, Paper, Typography, TextField, Snackbar } from "@material-ui/core"
+import { Alert } from '@material-ui/lab'
 import styles from "../styles/Home.module.css"
 import ReactDOM from "react-dom"
 import VisReact from "../components/Visreact"
@@ -64,6 +65,9 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(16),
       height: theme.spacing(16)
     }
+  },
+  form: {
+    margin: theme.spacing(2),
   }
 }))
 
@@ -81,10 +85,19 @@ export default function Home() {
     formState: { errors }
   } = useForm()
 
+  const [openSnackBar, setOpenSnackBar] = useState(false)
+  const [alertMessage, setAlertMessage] = useState({})
   const [objetos, setObjetos] = useState([])
   const [oracion, setOracion] = useState("")
   const [regex, setRegex] = useState("")
   const [tokensState, setTokensState] = useState([])
+
+  const handleCloseSnackBar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setOpenSnackBar(false)
+  }
 
   let palabra = "Dibujo"
   let datos = []
@@ -336,24 +349,40 @@ export default function Home() {
     crearArrayOracion()
   }
 
-  const onSubmit = (data) => {
-    try {
-      setRegex(data.regex)
-      const expresion = new RegExp(data.regex)
-      const result = expresion.exec(data.example)
-      if (result !== null) {
-        if (result[0] === data.example) {
-          console.log(`Palabra valida`)
+  const onSubmit = (data) => {    
+    if (data.example !== undefined && data.example.length !== 0) {
+      try {
+        setRegex(data.regex)
+        const expresion = new RegExp(data.regex)
+        const result = expresion.exec(data.example)
+        if (result !== null) {
+          if (result[0] === data.example) {
+            setAlertMessage({
+              severity: 'success',
+              message: `La palabra ingresada es válida`
+            })
+            setOpenSnackBar(true)
+          } else {
+            setAlertMessage({
+              severity: 'error',
+              message: `La palabra ingresada es inválida`
+            })
+            setOpenSnackBar(true)
+          }
         } else {
-          console.log("La palabra nel")
+          setAlertMessage({
+            severity: 'error',
+            message: `La palabra ingresada es inválida`
+          })
+          setOpenSnackBar(true)
         }
-      } else {
-        console.log("La palabra nel")
+        separarCadena(data.regex)
+      } catch (e) {
+        console.log(e)
+        console.log("La expresión regular que ingresó es inválida")
       }
+    }else {
       separarCadena(data.regex)
-    } catch (e) {
-      console.log(e)
-      console.log("La expresión regular que ingresó es inválida")
     }
   }
 
@@ -366,16 +395,18 @@ export default function Home() {
         token = ''
         for (let j = i + 1; j < regex.length; j++) {
           if (regex[j] === ')') {
-            if(regex[j+1] === '*'){
+            if (regex[j + 1] === '*') {
               tokens.push(`(${parentesis})*`)
               i += 2
+              parentesis = ''
               break;
-            }else {
+            } else {
               tokens.push(`(${parentesis})`)
+              parentesis = ''
               i++
               break;
             }
-            
+
           } else {
             parentesis = parentesis + regex[j]
             i++
@@ -404,9 +435,19 @@ export default function Home() {
       <div className={styles.container}>
         <div className={classes.paper}>
           <Paper elevation={3} className={classes.rooteeer}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <input {...register("regex")} />
-              <input {...register("example")} />
+            <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+              <TextField
+                id="regex"
+                label="Expresión regular"
+                {...register("regex")}
+                className={classes.form}
+              />
+              <TextField
+                id="example"
+                label="Ejemplo"
+                {...register("example")}
+                className={classes.form}
+              />
               <Button
                 variant="contained"
                 color="primary"
@@ -418,14 +459,20 @@ export default function Home() {
           </Paper>
           <Paper elevation={3} className={classes.rooteeer}>
             <div className="vis-react">
-              <VisReact 
-                tokensState={tokensState}              
+              <VisReact
+                tokensState={tokensState}
               />
             </div>
             <Diagrama enviado={"palabra"} regex={regex} />
           </Paper>
         </div>
       </div>
+      <Snackbar open={openSnackBar} autoHideDuration={3000} onClose={handleCloseSnackBar}>
+        <Alert onClose={handleCloseSnackBar} severity={alertMessage.severity} elevation={6} variant="filled">
+          {alertMessage.message}
+        </Alert>
+      </Snackbar>
+      <Footer />
       {/* */}
     </React.Fragment>
   )

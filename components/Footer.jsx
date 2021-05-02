@@ -4,7 +4,7 @@ import { Typography, Box, Container } from '@material-ui/core'
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Programa desarrollado por Santiago Navas y Luis Damián @ 2021'}
+      {'Programa desarrollado por Santiago Navas, Luis Damián y Paolo Veliz @ 2021'}
     </Typography>
   )
 }

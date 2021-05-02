@@ -47,25 +47,7 @@ export default function PermanentDrawerLeft(props) {
         anchor="left"
       >
         <div className={classes.toolbar} />
-        <Divider />
-        <List>
-          <ListItem button onClick={props.newArchivo}>
-            <ListItemIcon><AddCircle className={classes.icon} /></ListItemIcon>
-            <ListItemText primary="Nuevo Archivo" />
-          </ListItem>
-          <ListItem button onClick={props.openArchivo}>
-            <ListItemIcon><FolderOpen className={classes.icon} /></ListItemIcon>
-            <ListItemText primary="Abrir Archivo" />
-          </ListItem>
-          <ListItem button onClick={props.saveArchivo}>
-            <ListItemIcon><Save className={classes.icon} /></ListItemIcon>
-            <ListItemText primary="Guardar Tabla" />
-          </ListItem>
-          <ListItem button onClick={props.saveTexto}>
-            <ListItemIcon><Save className={classes.icon} /></ListItemIcon>
-            <ListItemText primary="Guardar Texto" />
-          </ListItem>
-        </List>
+        <Divider />        
         <Divider />
       </Drawer>
       <Snackbar open={props.open} autoHideDuration={6000} onClose={props.cerrarAlerta}>
